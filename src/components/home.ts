@@ -1,7 +1,7 @@
 import { PostsController } from "../Controllers/Posts.controller";
 import { Card } from "./card";
 
-const url = 'https://api-posts.codificando.xyz/'
+const url = 'http://localhost:3000/'
 let idUser = sessionStorage.getItem('id-user') as string
 
 const logoutButton = document.getElementById('btn-logout') as HTMLButtonElement;
