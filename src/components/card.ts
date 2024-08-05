@@ -38,14 +38,14 @@ export const Card = (props: IPost) => {
     groupBtn.className = 'd-flex justify-content-between mb-3'
     
     const btnEdit = document.createElement('button') as HTMLButtonElement
-    btnEdit.className = 'btn btn-primary w-50'
+    btnEdit.className = 'btn btn-primary w-50 edit'
     btnEdit.innerText = 'Editar'
     btnEdit.setAttribute('id-btn-edit', String(id))
     
     const btnDelete = document.createElement('button') as HTMLButtonElement
-    btnDelete.className = 'btn btn-danger w-50'
+    btnDelete.className = 'btn btn-danger w-50 del'
     btnDelete.innerText = 'Eliminar'
-    btnDelete.setAttribute('id-btn-edit', String(id))
+    btnDelete.setAttribute('id-btn-del', String(id))
     
     groupBtn.append(btnEdit, btnDelete)
     
