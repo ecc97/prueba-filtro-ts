@@ -451,21 +451,6 @@
       "deletedAt": null
     },
     {
-      "id": "33",
-      "postByUser": 3,
-      "title": "re",
-      "body": "re",
-      "creationDate": "2024-08-05T00:00:00.000Z",
-      "estimatedPublicationDate": "2024-08-22T00:00:00.000Z",
-      "status": "pending",
-      "approvalPercentage": 8,
-      "corrections": "holi",
-      "platform": "X",
-      "postUrl": "http://example.com/post",
-      "multimediaUrl": "http://example.com/post",
-      "deletedAt": null
-    },
-    {
       "id": "34",
       "postByUser": 7,
       "title": "Ejemplo de Post",
@@ -674,17 +659,6 @@
       "postUrl": "http://example.com/post",
       "multimediaUrl": null,
       "deletedAt": null
-    },
-    {
-      "id": "d15e",
-      "title": "ama",
-      "body": "ak",
-      "creationDate": "2024-08-05T17:55:25.211Z",
-      "estimatedPublicationDate": "2024-08-09T00:00:00.000Z",
-      "status": "pending",
-      "approvalPercentage": 75,
-      "platform": "x",
-      "postUrl": "http://example.com/post"
     }
   ]
 }
