@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="./scss/form.scss">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="./home.html">Data Leaker</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./home.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./form-data.html">Crear Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary" id="btn-logout">Cerrar sesión</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="formPost-main">
+        <h2 class="formPost-title">Formulario para postear</h2>
+  
+        <section class="form-container">
+          <form id="formPost-form" action="">
+            <input
+              type="text"
+              class="formPost-input"
+              id="title-data"
+              placeholder="Título" 
+              required
+            />
+            <textarea
+              class="formPost-textarea"
+              id="body-data"
+              placeholder="Descripcion" 
+              required
+            ></textarea>
+            <input type="date" 
+            class="formPost-input" 
+            id="date-data"
+            placeholder="Fecha estimada" 
+            required
+            />
+            <input
+              type="text"
+              class="formPost-input"
+              id="platform-data"
+              placeholder="Plataforma" 
+              required
+            />
+            <input
+              type="text"
+              class="formPost-input"
+              id="post-url-data"
+              placeholder="URL del post" 
+              required
+            />
+            <!-- <input
+              type="url"
+              class="formPost-input"
+              id="image-data"
+              placeholder="URL imagen"
+            /> -->
+            <div class="button-container">
+              <button type="submit" class="formPost-button btn btn-primary">Guardar</button>
+            </div>
+            <div class="button-container">
+                <button type="reset" class="btn btn-warning">Limpiar</button>
+              </div>
+          </form>
+        </section>
+      </main>
+      <script type="module" src="../components/formPost.ts"></script>
+</body>
+</html>
