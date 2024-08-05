@@ -29,7 +29,7 @@ export class UsersController {
         const response: Response = await fetch(`${this.url}${endPoint}`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'Application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(dataUser)
         })
