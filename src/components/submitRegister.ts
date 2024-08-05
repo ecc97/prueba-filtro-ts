@@ -13,20 +13,20 @@ const usersController: UsersController = new UsersController(url)
 form.addEventListener('submit', async (e: Event) => {
     e.preventDefault()
 
-    const userData = {
+    const userData: IUsers = {
         email: email.value,
         password: password.value
     }
 
     try {
-        const userRegistered = await usersController.createUser('register', userData)
+        const userRegistered: IUsers = await usersController.createUser('register', userData)
         console.log(userRegistered)
         Swal.fire({
             title: 'Se creó el usuario!',
             text: 'Usuario creado exitosamente',
             icon: 'success',
             confirmButtonText: 'OK'
-        }).then(() => {window.location.href= '../Views/login.html'})
+        }).then(() => {window.location.href= '/'})
         form.reset()
     } catch (error) {
         console.error(error)

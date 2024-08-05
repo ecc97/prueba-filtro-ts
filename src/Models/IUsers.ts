@@ -3,3 +3,7 @@ export interface IUsers {
     email: string,
     password: string
 }
+
+export interface ResponseLogin {
+    message: string
+}
