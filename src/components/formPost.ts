@@ -1,6 +1,6 @@
 import { IPost } from "../Models/IPost";
 import { PostsController } from "../Controllers/Posts.controller";
-import { containsExcludedWords } from "./checks";
+import { containsExcludedWords, checkSpelling } from "./checks";
 import Swal from "sweetalert2";
 
 
@@ -51,6 +51,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                 Swal.fire({
                     title: 'Error',
                     text: 'El post contiene palabras prohibidas.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            // Verificar corrección ortográfica
+            const incorrectWords = await checkSpelling(postData.body);
+            if (incorrectWords.length > 0) {
+                Swal.fire({
+                    title: 'Error',
+                    text: `El post contiene palabras mal escritas: ${incorrectWords.join(', ')}`,
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
