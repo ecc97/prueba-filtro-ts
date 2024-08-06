@@ -17,7 +17,6 @@ const postUrlData = document.getElementById('post-url-data') as HTMLInputElement
 
 document.addEventListener('DOMContentLoaded', async () => {
     const idPost = localStorage.getItem('id-edit'); 
-    console.log(containsExcludedWords('cabron'))
     
     if (idPost) { 
         try {
@@ -47,6 +46,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     
         try {
+            // Validar palabras excluidas
+            if (containsExcludedWords(postData.body)) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'El post contiene palabras prohibidas.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
             if(idPost) {
                 const postEdited = await postsController.putPost('posts/', idPost, postData);
                 console.log(postEdited)
