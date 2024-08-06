@@ -1,6 +1,8 @@
 import { IPost } from "../Models/IPost";
 import { PostsController } from "../Controllers/Posts.controller";
+import { containsExcludedWords } from "./checks";
 import Swal from "sweetalert2";
+
 
 const url: string = 'http://localhost:3000/'
 const postsController: PostsController = new PostsController(url)
@@ -12,9 +14,11 @@ const dateData = document.getElementById('date-data') as HTMLInputElement;
 const platformData = document.getElementById('platform-data') as HTMLInputElement;
 const postUrlData = document.getElementById('post-url-data') as HTMLInputElement;
 
+
 document.addEventListener('DOMContentLoaded', async () => {
     const idPost = localStorage.getItem('id-edit'); 
-
+    console.log(containsExcludedWords('cabron'))
+    
     if (idPost) { 
         try {
             const infoPost: IPost = await postsController.getInfo("posts/", idPost);
