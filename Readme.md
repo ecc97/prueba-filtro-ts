@@ -39,7 +39,13 @@ Para configurar y ejecutar el proyecto, sigue estos pasos:
 2. Ejecuta `npm run dev` para inicializar el proyecto.
 3. Ejecita json-server `npx json-server public/data/db.json`
 
-(Por mótivos de que no me ejecutaban algunos endpoints de los post, opté por utilizar una rest api con json-server, los únicos endpoints de la api:https://api-posts.codificando.xyz/  que funcionaron fue la de Auth login y Create User)
+### Configuración del Servidor Local con json-server
+#### Descripción del Problema
+
+Durante el desarrollo de la funcionalidad para crear posts, se encontraron restricciones y errores en la API original que impidieron la correcta creación de posts. Específicamente, la API devolvía errores relacionados con la autenticación de usuarios y la estructura de los datos enviados, lo que dificultó su uso continuo.
+
+Para continuar con el desarrollo y las pruebas, se decidió implementar una REST API local utilizando json-server, lo que permitió la creación y manipulación de posts sin las restricciones de la API original.
+
 ### Endpoints
 
 - **Auth**
