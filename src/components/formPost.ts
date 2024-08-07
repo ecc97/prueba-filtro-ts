@@ -54,20 +54,29 @@ document.addEventListener('DOMContentLoaded', async () => {
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
-                return;
+                return; // Detiene la ejecución de la función y no permite la creación del post
             }
 
             // Verificar corrección ortográfica
-            const incorrectWords = await checkSpelling(postData.body);
+            const incorrectWords = await checkSpelling(postData.body); // Llama a la función checkSpelling para verificar la ortografía del cuerpo del post y espera la respuesta
+            // Si se encuentran palabras mal escritas
             if (incorrectWords.length > 0) {
+                postData.approvalPercentage -= incorrectWords.length * 5; // Reduce el porcentaje de aprobación del post por cada palabra incorrecta encontrada
+
+                const storedPosts = JSON.parse(localStorage.getItem('posts') || '[]'); // Obtiene los posts almacenados en localStorage, o un arreglo vacío si no hay ninguno
+                storedPosts.push(postData); // Agrega el post actual al arreglo de posts almacenados localmente
+                localStorage.setItem('posts', JSON.stringify(storedPosts)); // Almacena el arreglo actualizado de posts en localStorage
                 Swal.fire({
-                    title: 'Error',
-                    text: `El post contiene palabras mal escritas: ${incorrectWords.join(', ')}`,
-                    icon: 'error',
+                    title: 'Post guardado localmente',
+                    text: 'El post se ha guardado localmente debido a errores ortográficos.',
+                    icon: 'info',
                     confirmButtonText: 'OK'
-                });
-                return;
+                }).then(() => { window.location.href = './home.html'; });
+                form.reset();
+                return; // Detiene la ejecución de la función y no permite la creación del post en la API
             }
+
+        
 
             if(idPost) {
                 const postEdited = await postsController.putPost('posts/', idPost, postData);
