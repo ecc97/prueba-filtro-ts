@@ -1,6 +1,8 @@
 import { IPost } from "../Models/IPost";
 import { PostsController } from "../Controllers/Posts.controller";
+import { containsExcludedWords, checkSpelling } from "./checks";
 import Swal from "sweetalert2";
+
 
 const url: string = 'http://localhost:3000/'
 const postsController: PostsController = new PostsController(url)
@@ -12,9 +14,10 @@ const dateData = document.getElementById('date-data') as HTMLInputElement;
 const platformData = document.getElementById('platform-data') as HTMLInputElement;
 const postUrlData = document.getElementById('post-url-data') as HTMLInputElement;
 
+
 document.addEventListener('DOMContentLoaded', async () => {
     const idPost = localStorage.getItem('id-edit'); 
-
+    
     if (idPost) { 
         try {
             const infoPost: IPost = await postsController.getInfo("posts/", idPost);
@@ -43,6 +46,38 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     
         try {
+            // Validar palabras excluidas
+            if (containsExcludedWords(postData.body)) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'El post contiene palabras prohibidas.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return; // Detiene la ejecución de la función y no permite la creación del post
+            }
+
+            // Verificar corrección ortográfica
+            const incorrectWords = await checkSpelling(postData.body); // Llama a la función checkSpelling para verificar la ortografía del cuerpo del post y espera la respuesta
+            // Si se encuentran palabras mal escritas
+            if (incorrectWords.length > 0) {
+                postData.approvalPercentage -= incorrectWords.length * 5; // Reduce el porcentaje de aprobación del post por cada palabra incorrecta encontrada
+
+                const storedPosts = JSON.parse(localStorage.getItem('posts') || '[]'); // Obtiene los posts almacenados en localStorage, o un arreglo vacío si no hay ninguno
+                storedPosts.push(postData); // Agrega el post actual al arreglo de posts almacenados localmente
+                localStorage.setItem('posts', JSON.stringify(storedPosts)); // Almacena el arreglo actualizado de posts en localStorage
+                Swal.fire({
+                    title: 'Post guardado localmente',
+                    text: 'El post se ha guardado localmente debido a errores ortográficos.',
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                }).then(() => { window.location.href = './home.html'; });
+                form.reset();
+                return; // Detiene la ejecución de la función y no permite la creación del post en la API
+            }
+
+        
+
             if(idPost) {
                 const postEdited = await postsController.putPost('posts/', idPost, postData);
                 console.log(postEdited)
