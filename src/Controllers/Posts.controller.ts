@@ -14,6 +14,13 @@ export class PostsController {
         return data
     }
 
+    async getPostById(endPoint: string, idPost: string | null): Promise<IPost> {
+        const response = await fetch(`${this.url}${endPoint}${idPost}`);
+        const data = await response.json(); 
+        console.log(data); 
+        return data; 
+    }
+
     async createPost(endPoint: string, dataPost: IPost): Promise<IPost> {
         // Hace una petición POST a la API para agregar un Post
         const response = await fetch(`${this.url}${endPoint}`, {

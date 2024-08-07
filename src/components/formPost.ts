@@ -16,7 +16,7 @@ const postUrlData = document.getElementById('post-url-data') as HTMLInputElement
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const idPost = localStorage.getItem('id-edit'); 
+    const idPost = localStorage.getItem('id-post'); 
     
     if (idPost) { 
         try {

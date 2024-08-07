@@ -51,7 +51,7 @@ export const Card = (props: IPost) => {
     
     const viewMoreButton = document.createElement("button") as HTMLButtonElement
     viewMoreButton.innerText = 'Más información'
-    viewMoreButton.className = 'btn btn-info w-100'
+    viewMoreButton.className = 'btn btn-info w-100 view-more'
     viewMoreButton.setAttribute('id-button', String(id))
     
     cardBody.append(cardTitle, cardApproval, cardPlatform, cardCreationDate, cardPublicDate, groupBtn, viewMoreButton)
