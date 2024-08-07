@@ -7,6 +7,7 @@ const url = 'http://localhost:3000/'
 
 const logoutButton = document.getElementById('btn-logout') as HTMLButtonElement;
 const card = document.getElementById('cards-container') as HTMLDivElement;
+const loader = document.getElementById('loader') as HTMLDivElement;
 
 const postsWithErrors = localStorage.getItem('posts');
 
@@ -14,6 +15,11 @@ window.addEventListener('DOMContentLoaded', () => {
     if(!sessionStorage.getItem('message')) {
         window.location.href = '/'
     }
+    loader.style.display = 'block';
+    showPosts().finally(() => { // Ejecuta después de que showPosts() se haya completado.
+        loader.style.display = 'none';
+        showPostsWithErrors(); // Muestra los posts con errores que están almacenados en localStorage
+    });
 })
 
 logoutButton?.addEventListener('click', () => {
