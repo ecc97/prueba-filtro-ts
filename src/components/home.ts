@@ -21,9 +21,14 @@ logoutButton?.addEventListener('click', () => {
     window.location.href = '/'
 })
 
+function hasIdPost(postId: string | null): void { 
+    return localStorage.setItem('id-post', String(postId)); // Almacena el id de la ciudad en el localStorage
+}
+
 async function showPosts(): Promise<void> {
     const postsController: PostsController = new PostsController(url)
     const posts = await postsController.getPosts('posts')
+    localStorage.removeItem('id-post')
     console.log(posts)
     posts.forEach((post) => {
         card.append(Card(post))
@@ -41,12 +46,20 @@ function showPostsWithErrors(): void {
     } 
 }
 
+document.addEventListener('click', (e: Event) => {
+    const target = e.target as HTMLElement;
+    if (target.className.includes('view-more')) {
+        const idViewMore = target.getAttribute('id-button');
+        hasIdPost(idViewMore) 
+        window.location.href = `./informacion-post.html?id=${idViewMore}`; // Redirige a la página de información de la ciudad
+    }
+});
 
 document.addEventListener('click', async (e: Event) => {
     const target = e.target as HTMLElement;
     if (target.className.includes('edit')) {
         const idEdit = target.getAttribute('id-btn-edit');
-        localStorage.setItem('id-edit', String(idEdit)); // Almacena el id de la ciudad en el localStorage
+        hasIdPost(idEdit) 
         window.location.href = `./form-data.html?id=${idEdit}`; // Redirige a la página de edición de la ciudad
     }
 });
